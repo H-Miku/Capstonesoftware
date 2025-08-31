@@ -1,11 +1,11 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, MoreHorizontal } from "lucide-react";
+import { ChevronLeft, MoreHorizontal, Activity, TrendingUp } from "lucide-react";
 import { BackgroundOrbs } from "@/components/layout/background-orbs";
-import { BottomNavigation } from "@/components/layout/bottom-navigation";
 import { WeekSelector } from "@/components/fitness/week-selector";
 import { ProgressRing } from "@/components/fitness/progress-ring";
 import { StatsCard } from "@/components/fitness/stats-card";
+import { LineGraph } from "@/components/fitness/line-graph";
 import { useFitnessData, useFitnessDataRange } from "@/hooks/use-fitness-data";
 
 export default function Home() {
@@ -43,6 +43,25 @@ export default function Home() {
 
   const { data: fitnessData, isLoading } = useFitnessData(selectedDate);
 
+  // Get week data for line graph
+  const endDate = new Date().toISOString().split('T')[0];
+  const startDate = useMemo(() => {
+    const date = new Date();
+    date.setDate(date.getDate() - 6);
+    return date.toISOString().split('T')[0];
+  }, []);
+
+  const { data: weekData, isLoading: weekLoading } = useFitnessDataRange(startDate, endDate);
+
+  const weeklyStats = useMemo(() => {
+    if (!weekData || weekData.length === 0) return { total: 0, average: 0 };
+    const totalSteps = weekData.reduce((sum, day) => sum + day.steps, 0);
+    return {
+      total: totalSteps,
+      average: Math.round(totalSteps / weekData.length)
+    };
+  }, [weekData]);
+
   const progress = fitnessData 
     ? Math.min((fitnessData.steps / fitnessData.stepGoal) * 100, 100)
     : 0;
@@ -51,7 +70,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <BackgroundOrbs />
       
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8 pb-24">
+      <div className="relative z-10 min-h-screen flex flex-col items-center px-4 py-8 space-y-6">
         
         {/* Main Fitness Card */}
         <motion.div
@@ -157,10 +176,65 @@ export default function Home() {
           </motion.div>
           
         </motion.div>
+
+        {/* Weekly Progress Graph */}
+        <motion.div
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm shadow-2xl neon-glow"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+          data-testid="card-weekly-progress"
+        >
+          <div className="flex items-center mb-4">
+            <Activity className="text-primary mr-2" />
+            <h2 className="text-white text-lg font-semibold">Weekly Progress</h2>
+          </div>
+          
+          {weekLoading ? (
+            <div className="h-32 skeleton-gradient rounded-lg" />
+          ) : (
+            <LineGraph data={weekData || []} height={120} />
+          )}
+        </motion.div>
+
+        {/* Weekly Stats Summary */}
+        <motion.div
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm shadow-2xl pulse-glow"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+          data-testid="card-weekly-stats"
+        >
+          <div className="flex items-center mb-4">
+            <TrendingUp className="text-primary mr-2" />
+            <h2 className="text-white text-lg font-semibold">This Week</h2>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <div className="text-center">
+              <p className="text-gray-400 text-xs">Total Steps</p>
+              {weekLoading ? (
+                <div className="h-8 skeleton-gradient rounded mt-1" />
+              ) : (
+                <p className="gradient-text text-2xl font-bold" data-testid="text-weekly-total">
+                  {weeklyStats.total.toLocaleString()}
+                </p>
+              )}
+            </div>
+            <div className="text-center">
+              <p className="text-gray-400 text-xs">Daily Average</p>
+              {weekLoading ? (
+                <div className="h-8 skeleton-gradient rounded mt-1" />
+              ) : (
+                <p className="gradient-text text-2xl font-bold" data-testid="text-weekly-average">
+                  {weeklyStats.average.toLocaleString()}
+                </p>
+              )}
+            </div>
+          </div>
+        </motion.div>
         
       </div>
-
-      <BottomNavigation />
     </div>
   );
 }
