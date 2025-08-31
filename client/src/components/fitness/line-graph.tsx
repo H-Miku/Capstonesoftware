@@ -53,7 +53,7 @@ export function LineGraph({ data, height = 120, className = "" }: LineGraphProps
     return (
       <div className={`w-full ${className}`} style={{ height }} data-testid="line-graph-empty">
         <div className="flex items-center justify-center h-full text-gray-400 text-sm">
-          No data available
+          Lorem ipsum dolor sit amet
         </div>
       </div>
     );
@@ -64,14 +64,14 @@ export function LineGraph({ data, height = 120, className = "" }: LineGraphProps
       <svg width="100%" height={height} viewBox="0 0 280 120" className="overflow-visible">
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="50%" stopColor="#06b6d4" />
-            <stop offset="100%" stopColor="#a855f7" />
+            <stop offset="0%" stopColor="#a855f7" />
+            <stop offset="50%" stopColor="#8b5cf6" />
+            <stop offset="100%" stopColor="#7c3aed" />
           </linearGradient>
           <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgba(16, 185, 129, 0.3)" />
-            <stop offset="50%" stopColor="rgba(6, 182, 212, 0.2)" />
-            <stop offset="100%" stopColor="rgba(168, 85, 247, 0.1)" />
+            <stop offset="0%" stopColor="rgba(168, 85, 247, 0.3)" />
+            <stop offset="50%" stopColor="rgba(139, 92, 246, 0.2)" />
+            <stop offset="100%" stopColor="rgba(124, 58, 237, 0.1)" />
           </linearGradient>
         </defs>
         

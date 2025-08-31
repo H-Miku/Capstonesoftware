@@ -27,9 +27,9 @@ export function ProgressRing({
       >
         <defs>
           <linearGradient id="stepsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="50%" stopColor="#06b6d4" />
-            <stop offset="100%" stopColor="#a855f7" />
+            <stop offset="0%" stopColor="#a855f7" />
+            <stop offset="50%" stopColor="#8b5cf6" />
+            <stop offset="100%" stopColor="#7c3aed" />
           </linearGradient>
           <filter id="glow">
             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -84,7 +84,7 @@ export function ProgressRing({
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.5 }}
           >
-            of goal
+            ipsum dolor
           </motion.p>
         </div>
       </div>

@@ -26,7 +26,7 @@ export default function Home() {
       
       let display;
       if (isToday) {
-        display = `Today, ${date.getDate()} ${date.toLocaleDateString('en', { month: 'short' })}`;
+        display = `Lorem, ${date.getDate()} Sit`;
       } else {
         display = date.getDate().toString();
       }
@@ -107,9 +107,9 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <h1 className="gradient-text text-2xl font-bold mb-3" data-testid="text-title">
-              Current situation
+              Lorem Ipsum Dolor
             </h1>
-            <div className="w-12 h-0.5 bg-gradient-to-r from-primary via-cyan-400 to-purple-400 rounded" />
+            <div className="w-12 h-0.5 bg-gradient-to-r from-primary via-purple-400 to-purple-600 rounded" />
           </motion.div>
 
           {/* Week Days Selector */}
@@ -133,7 +133,7 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <p className="text-gray-400 text-xs font-semibold tracking-wider mb-2">
-              STEPS
+              CONSECTETUR
             </p>
             {isLoading ? (
               <div className="h-14 skeleton-gradient rounded-lg mb-4" />
@@ -163,13 +163,13 @@ export default function Home() {
           >
             <StatsCard
               icon="calories"
-              label="Calories"
+              label="Amet"
               value={fitnessData?.calories || 0}
               delay={0.1}
             />
             <StatsCard
               icon="distance"
-              label="Distance"
+              label="Tempor"
               value={fitnessData?.distance || "0 km"}
               delay={0.2}
             />
@@ -187,7 +187,7 @@ export default function Home() {
         >
           <div className="flex items-center mb-4">
             <Activity className="text-primary mr-2" />
-            <h2 className="text-white text-lg font-semibold">Weekly Progress</h2>
+            <h2 className="text-white text-lg font-semibold">Sed Do Eiusmod</h2>
           </div>
           
           {weekLoading ? (
@@ -207,12 +207,12 @@ export default function Home() {
         >
           <div className="flex items-center mb-4">
             <TrendingUp className="text-primary mr-2" />
-            <h2 className="text-white text-lg font-semibold">This Week</h2>
+            <h2 className="text-white text-lg font-semibold">Magna Aliqua</h2>
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div className="text-center">
-              <p className="text-gray-400 text-xs">Total Steps</p>
+              <p className="text-gray-400 text-xs">Ut Enim</p>
               {weekLoading ? (
                 <div className="h-8 skeleton-gradient rounded mt-1" />
               ) : (
@@ -222,7 +222,7 @@ export default function Home() {
               )}
             </div>
             <div className="text-center">
-              <p className="text-gray-400 text-xs">Daily Average</p>
+              <p className="text-gray-400 text-xs">Minim Veniam</p>
               {weekLoading ? (
                 <div className="h-8 skeleton-gradient rounded mt-1" />
               ) : (
