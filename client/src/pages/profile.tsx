@@ -32,14 +32,14 @@ export default function Profile() {
           >
             <ChevronLeft className="text-gray-200 text-sm" />
           </motion.button>
-          <h1 className="text-white text-2xl font-bold" data-testid="text-profile-title">
+          <h1 className="gradient-text text-2xl font-bold" data-testid="text-profile-title">
             Profile
           </h1>
         </motion.div>
 
         {/* Profile Card */}
         <motion.div
-          className="glassmorphic rounded-3xl p-6 w-full max-w-sm mx-auto mb-6"
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm mx-auto mb-6 neon-glow"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
@@ -73,7 +73,7 @@ export default function Profile() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <p className="text-primary text-lg font-bold" data-testid="text-total-steps">
+              <p className="gradient-text text-lg font-bold" data-testid="text-total-steps">
                 {profileData.totalSteps}
               </p>
               <p className="text-gray-400 text-xs">Total Steps</p>
@@ -84,7 +84,7 @@ export default function Profile() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <p className="text-primary text-lg font-bold" data-testid="text-achievements">
+              <p className="gradient-text text-lg font-bold" data-testid="text-achievements">
                 {profileData.achievements}
               </p>
               <p className="text-gray-400 text-xs">Achievements</p>
@@ -95,7 +95,7 @@ export default function Profile() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
-              <p className="text-primary text-lg font-bold" data-testid="text-daily-goal">
+              <p className="gradient-text text-lg font-bold" data-testid="text-daily-goal">
                 {profileData.dailyGoal.toLocaleString()}
               </p>
               <p className="text-gray-400 text-xs">Daily Goal</p>
@@ -105,7 +105,7 @@ export default function Profile() {
 
         {/* Settings Options */}
         <motion.div
-          className="glassmorphic rounded-3xl p-6 w-full max-w-sm mx-auto"
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm mx-auto pulse-glow"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}

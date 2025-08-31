@@ -14,10 +14,11 @@ export function StatsCard({ icon, label, value, delay = 0 }: StatsCardProps) {
 
   return (
     <motion.div
-      className="glassmorphic rounded-xl p-4 text-center"
+      className="glassmorphic-card rounded-xl p-4 text-center pulse-glow"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
+      whileHover={{ scale: 1.05, y: -5 }}
       data-testid={`card-${icon}`}
     >
       <IconComponent className={`${iconColor} text-xl mb-2 mx-auto`} />

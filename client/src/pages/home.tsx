@@ -55,7 +55,7 @@ export default function Home() {
         
         {/* Main Fitness Card */}
         <motion.div
-          className="glassmorphic rounded-3xl p-6 w-full max-w-sm shadow-2xl"
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm shadow-2xl neon-glow"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -87,10 +87,10 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <h1 className="text-white text-2xl font-bold mb-3" data-testid="text-title">
+            <h1 className="gradient-text text-2xl font-bold mb-3" data-testid="text-title">
               Current situation
             </h1>
-            <div className="w-12 h-0.5 bg-primary rounded" />
+            <div className="w-12 h-0.5 bg-gradient-to-r from-primary via-cyan-400 to-purple-400 rounded" />
           </motion.div>
 
           {/* Week Days Selector */}
@@ -117,9 +117,9 @@ export default function Home() {
               STEPS
             </p>
             {isLoading ? (
-              <div className="h-14 bg-gray-800 rounded animate-pulse" />
+              <div className="h-14 skeleton-gradient rounded-lg mb-4" />
             ) : (
-              <p className="text-white text-5xl font-thin mb-4" data-testid="text-steps-count">
+              <p className="text-white text-5xl font-thin mb-4 gradient-text" data-testid="text-steps-count">
                 {fitnessData?.steps?.toLocaleString() || '0'}
               </p>
             )}

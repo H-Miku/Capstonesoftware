@@ -28,8 +28,16 @@ export function ProgressRing({
         <defs>
           <linearGradient id="stepsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#10b981" />
-            <stop offset="100%" stopColor="#059669" />
+            <stop offset="50%" stopColor="#06b6d4" />
+            <stop offset="100%" stopColor="#a855f7" />
           </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge> 
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
         
         {/* Background circle */}
@@ -52,18 +60,32 @@ export function ProgressRing({
           fill="none"
           strokeLinecap="round"
           strokeDasharray={circumference}
+          filter="url(#glow)"
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         />
       </svg>
       
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center">
-          <span className="text-white text-lg font-semibold" data-testid="text-progress-percentage">
+          <motion.span 
+            className="gradient-text text-lg font-semibold" 
+            data-testid="text-progress-percentage"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
             {Math.round(progress)}%
-          </span>
-          <p className="text-gray-400 text-xs">of goal</p>
+          </motion.span>
+          <motion.p 
+            className="text-gray-400 text-xs"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+          >
+            of goal
+          </motion.p>
         </div>
       </div>
     </div>

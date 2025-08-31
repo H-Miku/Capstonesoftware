@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { BackgroundOrbs } from "@/components/layout/background-orbs";
 import { BottomNavigation } from "@/components/layout/bottom-navigation";
+import { LineGraph } from "@/components/fitness/line-graph";
 import { useFitnessDataRange } from "@/hooks/use-fitness-data";
-import { ChevronLeft, TrendingUp } from "lucide-react";
+import { ChevronLeft, TrendingUp, Activity } from "lucide-react";
 
 export default function Stats() {
   const endDate = new Date().toISOString().split('T')[0];
@@ -46,14 +47,14 @@ export default function Stats() {
           >
             <ChevronLeft className="text-gray-200 text-sm" />
           </motion.button>
-          <h1 className="text-white text-2xl font-bold" data-testid="text-stats-title">
+          <h1 className="gradient-text text-2xl font-bold" data-testid="text-stats-title">
             Weekly Stats
           </h1>
         </motion.div>
 
         {/* Stats Overview */}
         <motion.div
-          className="glassmorphic rounded-3xl p-6 w-full max-w-sm mx-auto mb-6"
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm mx-auto mb-6 pulse-glow"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
@@ -67,25 +68,53 @@ export default function Stats() {
           <div className="grid grid-cols-2 gap-4">
             <div className="text-center">
               <p className="text-gray-400 text-xs">Total Steps</p>
-              <p className="text-white text-2xl font-bold" data-testid="text-total-steps">
-                {isLoading ? "..." : totalSteps.toLocaleString()}
-              </p>
+              {isLoading ? (
+                <div className="h-8 skeleton-gradient rounded mt-1" />
+              ) : (
+                <p className="gradient-text text-2xl font-bold" data-testid="text-total-steps">
+                  {totalSteps.toLocaleString()}
+                </p>
+              )}
             </div>
             <div className="text-center">
               <p className="text-gray-400 text-xs">Daily Average</p>
-              <p className="text-white text-2xl font-bold" data-testid="text-average-steps">
-                {isLoading ? "..." : weeklyAverage.toLocaleString()}
-              </p>
+              {isLoading ? (
+                <div className="h-8 skeleton-gradient rounded mt-1" />
+              ) : (
+                <p className="gradient-text text-2xl font-bold" data-testid="text-average-steps">
+                  {weeklyAverage.toLocaleString()}
+                </p>
+              )}
             </div>
           </div>
         </motion.div>
 
-        {/* Daily Breakdown */}
+        {/* Line Graph */}
         <motion.div
-          className="glassmorphic rounded-3xl p-6 w-full max-w-sm mx-auto"
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm mx-auto mb-6 neon-glow"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          data-testid="card-line-graph"
+        >
+          <div className="flex items-center mb-4">
+            <Activity className="text-primary mr-2" />
+            <h2 className="text-white text-lg font-semibold">Progress Trend</h2>
+          </div>
+          
+          {isLoading ? (
+            <div className="h-32 skeleton-gradient rounded-lg" />
+          ) : (
+            <LineGraph data={weekData || []} height={120} />
+          )}
+        </motion.div>
+
+        {/* Daily Breakdown */}
+        <motion.div
+          className="glassmorphic-card rounded-3xl p-6 w-full max-w-sm mx-auto pulse-glow"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.25 }}
           data-testid="card-daily-breakdown"
         >
           <h3 className="text-white text-lg font-semibold mb-4">Daily Breakdown</h3>
@@ -93,7 +122,7 @@ export default function Stats() {
           {isLoading ? (
             <div className="space-y-3">
               {[...Array(7)].map((_, i) => (
-                <div key={i} className="h-8 bg-gray-800 rounded animate-pulse" />
+                <div key={i} className="h-8 skeleton-gradient rounded" />
               ))}
             </div>
           ) : (
