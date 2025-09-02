@@ -25,9 +25,10 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: path.resolve(import.meta.dirname, "dist"), // 👈 simpler output path
     emptyOutDir: true,
   },
+  base: "/Capstonesoftware/", // 👈 add this (repo name)
   server: {
     fs: {
       strict: true,
